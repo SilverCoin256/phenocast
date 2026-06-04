@@ -5,9 +5,9 @@ Design rationale:
     At EPV < 1, free parameters must be severely constrained.
   - Solution: pool features to modality-level summaries, then fit an L2
     logistic regression with ~10 effective parameters.
-  - This trades discriminative ceiling for calibration stability and
+  - This gives up some predictive power for calibration stability and
     interpretability.
-  - AUROC ~0.82 (vs. chance 0.50) despite the constraint.
+  - AUROC ~0.82 despite the heavy constraint.
 """
 
 import numpy as np

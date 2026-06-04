@@ -1,8 +1,7 @@
 """Run baseline models (Elastic Net, Random Forest, XGBoost) under LOSO-CV.
 
 LOSO-CV = Leave-One-Subject-Out Cross-Validation.
-This is the correct split for n=38 because it ensures no subject's data
-appears in both the training and test set for any prediction.
+This is the right split for n=38 because it keeps each subject out of both train and test.
 """
 
 import os

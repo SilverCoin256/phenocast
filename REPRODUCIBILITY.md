@@ -1,6 +1,6 @@
 # Reproducibility Guide
 
-This document explains how to reproduce every result in the paper from scratch.
+How to reproduce every result from scratch.
 
 ## Environment
 
@@ -37,7 +37,7 @@ python src/run_loso_cv.py
 Runs elastic net, random forest, and XGBoost under leave-one-subject-out CV.
 Outputs to `results/baseline_predictions/` and `results/baseline_metrics.csv`.
 
-Expected AUROCs (may vary slightly by sklearn version):
+Expected AUROCs (can vary slightly by sklearn version):
 - Elastic Net: ~0.710
 - Random Forest: ~0.788
 - XGBoost: ~0.806
@@ -88,7 +88,7 @@ Outputs calibration curves, Brier scores, and ECE to `results/calibration/`.
 ## Randomness Control
 
 All scripts use `random_state=42` and `numpy.random.seed(42)` at the top.
-Results should be identical across runs with the same sklearn/numpy versions.
+Results should match across runs with the same sklearn/numpy versions.
 
 ## Known Version Sensitivity
 

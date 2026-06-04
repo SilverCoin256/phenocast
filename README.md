@@ -8,7 +8,7 @@ This is my Regeneron ISEF 2026 research project in Behavioral and Social Science
 
 ## Research Question
 
-> Can longitudinal passive smartphone behavioral representations predict endpoint PHQ-9 mental health status in a leakage-safe, calibrated manner in the StudentLife cohort?
+> Can longitudinal passive smartphone behavioral representations predict endpoint PHQ-9 mental health status without data leakage and with calibrated probabilities in the StudentLife cohort?
 
 I used the [StudentLife dataset](http://studentlife.cs.dartmouth.edu/) (Wang et al., 2014), which collected passive smartphone data from 48 Dartmouth students over one academic term (spring 2013). After preprocessing, I retained **n=38 subjects** with complete behavioral telemetry and a post-study PHQ-9 score.
 
@@ -24,9 +24,9 @@ I used the [StudentLife dataset](http://studentlife.cs.dartmouth.edu/) (Wang et 
 | Random Forest (audited features) | 0.7880 | [0.614, 0.963] | 0.1314 | 0.0748 |
 | Elastic Net (audited features) | 0.7097 | [0.548, 0.872] | 0.2093 | 0.0796 |
 
-All results use **leave-one-subject-out cross-validation (LOSO-CV)** — the only split strategy that fully prevents subject-level data leakage at n=38.
+All results use **leave-one-subject-out cross-validation (LOSO-CV)** — the only split that fully prevents subject-level data leakage at n=38.
 
-**DeLong one-sided test vs. chance (AUC = 0.50):** PHENOCAST-CORE z ≈ 4.3, p < 0.001. All primary models significantly exceed chance (RF: p=0.0006; XGBoost: p<0.0001; MLP: p=0.0001).
+**DeLong one-sided test vs. chance (AUC = 0.50):** PHENOCAST-CORE z ≈ 4.3, p < 0.001. All primary models beat chance (RF: p=0.0006; XGBoost: p<0.0001; MLP: p=0.0001).
 
 ---
 
@@ -42,7 +42,7 @@ I started by adding graph-based complexity (GNN layers connecting behavioral fea
 | Shuffled-day controls | 0.5705 | temporal structure matters |
 | Random 7-day window | 0.5161 | full-term context needed |
 
-The graph model collapsing to near-chance AUROC is actually the most important result. With only 7 positive cases out of 38 subjects, adding parameters made things worse. The data forced me to make the model smaller — hence "evidence-forced simplification."
+The graph model collapsing to near-chance AUROC is actually the most important result. With only 7 positive cases out of 38 subjects, adding parameters made things worse. The data forced me to make the model smaller. I call it evidence-forced simplification.
 
 ---
 
