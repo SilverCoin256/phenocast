@@ -1,8 +1,6 @@
 # PHENOCAST
 
-**Can passive smartphone behavioral patterns predict endpoint depression severity in university students?**
-
-This is my Regeneron ISEF 2026 research project in Behavioral and Social Sciences (BEHA). Short answer: there is a real but fragile signal — and making the model *simpler* actually worked better than making it complex.
+PHENOCAST tests whether smartphone activity during a term predicts end-of-term PHQ-9 status in the StudentLife cohort. This was a Regeneron ISEF 2026 project in Behavioral and Social Sciences. The analysis used 38 students, seven with elevated scores. Adding graph layers reduced AUROC from 0.8203 to 0.5392 in the reported ablation.
 
 ---
 
@@ -24,13 +22,13 @@ I used the [StudentLife dataset](http://studentlife.cs.dartmouth.edu/) (Wang et 
 | Random Forest (audited features) | 0.7880 | [0.614, 0.963] | 0.1314 | 0.0748 |
 | Elastic Net (audited features) | 0.7097 | [0.548, 0.872] | 0.2093 | 0.0796 |
 
-All results use **leave-one-subject-out cross-validation (LOSO-CV)** — the only split that fully prevents subject-level data leakage at n=38.
+The reported results use leave-one-subject-out cross-validation (LOSO-CV). Each fold reserves one student for testing and uses the other students for training.
 
 **DeLong one-sided test vs. chance (AUC = 0.50):** PHENOCAST-CORE z ≈ 4.3, p < 0.001. All primary models beat chance (RF: p=0.0006; XGBoost: p<0.0001; MLP: p=0.0001).
 
 ---
 
-## What Failed — and Why That's the Point
+## Ablation results
 
 I started by adding graph-based complexity (GNN layers connecting behavioral features across time). The result:
 
@@ -42,11 +40,11 @@ I started by adding graph-based complexity (GNN layers connecting behavioral fea
 | Shuffled-day controls | 0.5705 | temporal structure matters |
 | Random 7-day window | 0.5161 | full-term context needed |
 
-The graph model collapsing to near-chance AUROC is actually the most important result. With only 7 positive cases out of 38 subjects, adding parameters made things worse. The data forced me to make the model smaller. I call it evidence-forced simplification.
+The graph-augmented model scored near chance. With seven elevated PHQ-9 cases in the cohort, the simpler model performed better in this comparison.
 
 ---
 
-## Why This is a BEHA Project (Not Just a CS Project)
+## Behavioral measures
 
 The features I used are behavioral proxies grounded in psychology literature:
 
@@ -58,7 +56,7 @@ The features I used are behavioral proxies grounded in psychology literature:
 | Bluetooth proximity | Social exposure |
 | Dark/rest proxy | Rest-activity rhythm theory |
 
-I'm not claiming these features *cause* depression — I'm testing whether they *contain predictive information* consistent with these theories. That distinction matters.
+The analysis tests predictive associations within the cohort. It cannot establish whether the measured behaviors cause depression.
 
 ---
 
